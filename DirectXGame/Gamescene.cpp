@@ -6,6 +6,7 @@ using namespace KamataEngine;
 Gamescene::~Gamescene() { 
 	delete sprite_;
 	delete model_;
+	delete player_;
 }
 
 void Gamescene::Initialize() { 
@@ -19,9 +20,15 @@ void Gamescene::Initialize() {
 	
 	//ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
+
 	//カメラの初期化
 	camera_.Initialize();
 
+	//自キャラの生成
+	player_ = new Player();
+
+	//自キャラの初期化
+	player_->Initialize(model_, textureHandle_, &camera_);
 }
 
 void Gamescene::Update() {
@@ -32,6 +39,7 @@ void Gamescene::Update() {
 	position.y += 1.0f;
 
 	sprite_->SetPosition(position);
+	player_->Update();
 }
 
 void Gamescene::Draw() {
@@ -48,7 +56,9 @@ void Gamescene::Draw() {
 
 	Model::PreDraw(dxCommon->GetCommandList());
 
-	model_->Draw(worldTransform_, camera_, textureHandle_);
+
+	player_->Draw();
 
 	Model::PostDraw();
+
 }

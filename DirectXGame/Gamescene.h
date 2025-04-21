@@ -1,5 +1,6 @@
 #pragma once
 #include "KamataEngine.h"
+#include "Player.h"
 
 
 
@@ -13,6 +14,7 @@ class Gamescene
 	KamataEngine::Model* model_ = nullptr;
 	KamataEngine::WorldTransform worldTransform_;
 	KamataEngine::Camera camera_;
+	Player* player_ = nullptr;
 
 	public:
 
