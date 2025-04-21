@@ -2,29 +2,53 @@
 
 using namespace KamataEngine;
 
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 Gamescene::~Gamescene() { 
+	delete sprite_;
 	delete model_;
 }
 
 void Gamescene::Initialize() { 
-	//ƒtƒ@ƒCƒ‹–¼‚ðŽw’è‚µ‚ÄƒeƒNƒXƒ`ƒƒ‚ð“Ç‚Ýž‚Þ
-	textureHandle_ = TextureManager::Load("mario_PNG125.png"); 
+	//ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æŒ‡å®šã—ã¦ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’èª­ã¿è¾¼ã‚€
+	textureHandle_ = TextureManager::Load("debugfont.png"); 
 
-	//3Dƒ‚ƒfƒ‹‚Ì¶¬
+	sprite_ = Sprite::Create(textureHandle_, {100, 50});
+
+	//3Dãƒ¢ãƒ‡ãƒ«ã®ç”Ÿæˆ
 	model_ = Model::Create();
-
-	//ƒ[ƒ‹ƒhƒgƒ‰ƒ“ƒXƒtƒH[ƒ€‚Ì‰Šú‰»
+	
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰ãƒˆãƒ©ãƒ³ã‚¹ãƒ•ã‚©ãƒ¼ãƒ ã®åˆæœŸåŒ–
 	worldTransform_.Initialize();
-	//ƒJƒƒ‰‚Ì‰Šú‰»
+	//ã‚«ãƒ¡ãƒ©ã®åˆæœŸåŒ–
 	camera_.Initialize();
 
 }
 
 void Gamescene::Update() {
 
+	Vector2 position = sprite_->GetPosition();
+
+	position.x += 2.0f;
+	position.y += 1.0f;
+
+	sprite_->SetPosition(position);
 }
 
 void Gamescene::Draw() {
 
+	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+
+	Sprite::PreDraw(dxCommon->GetCommandList());
+
+	sprite_->Draw();
+
+	Sprite::PostDraw();
+
+
+
+	Model::PreDraw(dxCommon->GetCommandList());
+
+	model_->Draw(worldTransform_, camera_, textureHandle_);
+
+	Model::PostDraw();
 }
