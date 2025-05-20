@@ -1,3 +1,4 @@
+#include "KamataEngine.h"
 #include "Player.h"
 #include "cassert"
 
