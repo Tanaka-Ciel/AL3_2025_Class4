@@ -1,6 +1,7 @@
 #include "KamataEngine.h"
 #include "Player.h"
 #include "cassert"
+#include "Mymath.h"
 
 using namespace KamataEngine;
 
@@ -17,6 +18,7 @@ void Player::Initialize(Model* model, uint32_t textureHandle, Camera* camera)
 void Player::Update()
 { 
 	worldTransform_.TransferMatrix();
+
 }
 
 

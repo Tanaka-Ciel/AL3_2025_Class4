@@ -9,6 +9,7 @@ Gamescene::~Gamescene() {
 	delete model_;
 	delete player_;
 	delete debugCamera_;
+	delete modelSkydome_;
 
 	for (std::vector<WorldTransform*>& worldTransformBlockLine : worldTransformBlocks_) {
 		for (WorldTransform* worldTransformBlock : worldTransformBlockLine) {
@@ -25,7 +26,7 @@ void Gamescene::Initialize() {
 	sprite_ = Sprite::Create(textureHandle_, {100, 50});
 
 	//3Dモデルの生成
-	model_ = Model::CreateFromOBJ("cube");
+	model_ = Model::CreateFromOBJ("block", true);
 
 	//カメラの初期化
 	camera_.Initialize();
@@ -33,8 +34,17 @@ void Gamescene::Initialize() {
 	//自キャラの生成
 	player_ = new Player();
 
+	modelplayer_ = Model::CreateFromOBJ("player", true);
+
 	//自キャラの初期化
-	player_->Initialize(model_, textureHandle_, &camera_);
+	player_->Initialize(modelplayer_, textureHandle_, &camera_);
+
+
+	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
+
+	skydome_ = new Skydome();
+
+	skydome_->Initialize(modelSkydome_, textureHandle_, &camera_);
 
 	//デバッグカメラの生成
 	debugCamera_ = new DebugCamera(1280, 720);
@@ -128,6 +138,8 @@ void Gamescene::Draw() {
 	}
 
 	player_->Draw();
+
+	skydome_->Draw();
 
 	Model::PostDraw();
 

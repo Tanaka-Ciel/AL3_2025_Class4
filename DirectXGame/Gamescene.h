@@ -1,6 +1,7 @@
 #pragma once
 #include "KamataEngine.h"
 #include "Player.h"
+#include "Skydome.h"
 #include <vector>
 
 
@@ -13,8 +14,11 @@ public:
 	KamataEngine::WorldTransform worldTransform;
 	KamataEngine::Sprite* sprite_ = nullptr;
 	KamataEngine::Model* model_ = nullptr;
+	KamataEngine::Model* modelplayer_ = nullptr;
 	KamataEngine::Camera camera_;
+	KamataEngine::Model* modelSkydome_ = nullptr;
 	Player* player_ = nullptr;
+	Skydome* skydome_ = nullptr;
 	std::vector<std::vector<KamataEngine::WorldTransform*>> worldTransformBlocks_;
 
 		//初期化
