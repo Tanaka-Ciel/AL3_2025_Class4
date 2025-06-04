@@ -3,7 +3,8 @@
 
 using namespace KamataEngine;
 
-void Skydome::Initialize(Model* model, uint32_t textureHandle, Camera* camera) {
+void Skydome::Initialize(Model* model, uint32_t textureHandle, Camera* camera)
+{
 	assert(model);
 	camera_ = camera;
 	model_ = model;

@@ -2,6 +2,7 @@
 #include "KamataEngine.h"
 #include "Player.h"
 #include "Skydome.h"
+#include "MapChipField.h"
 #include <vector>
 
 
@@ -11,7 +12,6 @@ class Gamescene
 {
 public:
 
-	KamataEngine::WorldTransform worldTransform;
 	KamataEngine::Sprite* sprite_ = nullptr;
 	KamataEngine::Model* model_ = nullptr;
 	KamataEngine::Model* modelplayer_ = nullptr;
@@ -20,6 +20,7 @@ public:
 	Player* player_ = nullptr;
 	Skydome* skydome_ = nullptr;
 	std::vector<std::vector<KamataEngine::WorldTransform*>> worldTransformBlocks_;
+	MapChipField* mapChipField_;
 
 		//初期化
 	    void Initialize();
@@ -29,6 +30,8 @@ public:
 
 		//描画
 	    void Draw();
+
+		void GenerateBlocks();
 
 		~Gamescene();
 
